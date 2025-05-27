@@ -1,6 +1,6 @@
 # Zephyr
 
-What and Why?
+## What and Why?
 This is a repo where you can find zephyr examples.
 
 It will use the zephyrs methods to write code, drivers and stuff.
