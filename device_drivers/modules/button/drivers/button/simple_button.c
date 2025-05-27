@@ -2,6 +2,7 @@
 
 #include "simple_button.h"
 #include <errno.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
 
 LOG_MODULE_REGISTER(button);
@@ -13,7 +14,7 @@ static int button_init(const struct device *dev)
 
     const struct gpio_dt_spec *btn = &cfg->btn;
 
-    if (!gpio_is_ready())
+    if (!gpio_is_ready_dt(btn))
     {
         LOG_ERR("GPIO is not ready");
         return -ENODEV;
@@ -57,10 +58,10 @@ static const struct button_api button_api_functions = {
 
 #define BUTTON_DEFINE(inst)                                                                                            \
     static const struct button_config button_config_##inst = {                                                         \
-        .btn = GPIO_DT_SPEC_GET(DT_PHANDLE(DT_INST(inst, custom_button), pins), gpios),                                \
+        .btn = GPIO_DT_SPEC_GET(DT_PHANDLE(DT_INST(inst, simple_button), pin), gpios),                                 \
         .id = inst,                                                                                                    \
     };                                                                                                                 \
-    DEVICE_DT_INST_DEFINE(inst, button_init, NULL, NULL, &button_config_##inst, POST_KERNEL, CONFIG_GPIO_PRIORITY,     \
-                          &button_api_funcs);
+    DEVICE_DT_INST_DEFINE(inst, button_init, NULL, NULL, &button_config_##inst, POST_KERNEL,                           \
+                          CONFIG_GPIO_INIT_PRIORITY, &button_api_functions);
 
 DT_INST_FOREACH_STATUS_OKAY(BUTTON_DEFINE);

@@ -12,7 +12,7 @@ extern "C"
 
     struct button_api
     {
-        int (*get)(const struct deivce *dev, uint8_t *state);
+        int (*get)(const struct device *dev, uint8_t *state);
     };
 
     struct button_config

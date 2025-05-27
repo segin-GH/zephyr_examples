@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <zephyr/kernel.h>
 
-static const struct device *btn_dev = DEVICE_DT_GET(DT_ALIAS(button_0));
-static const struct device *btn_dev2 = DEVICE_DT_GET(DT_ALIAS(button_1));
+static const struct device *btn_dev = DEVICE_DT_GET(DT_ALIAS(my_button_1));
+static const struct device *btn_dev2 = DEVICE_DT_GET(DT_ALIAS(my_button_2));
 
 int main(void)
 {
@@ -36,7 +36,7 @@ int main(void)
         if (ret < 0)
             printf("not able to do a get val\n");
 
-        printf("%u, %u", val, val2);
+        printf("%u, %u\n", val, val2);
 
         k_msleep(100);
     }

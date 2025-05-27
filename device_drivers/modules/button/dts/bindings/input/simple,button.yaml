@@ -1,8 +1,8 @@
-description: Custom button
+description: Simple button
 
 compatible: "simple,button"
 
 properties:
   pin:
-  type: phandle
-  required: true
+    type: phandle
+    required: true

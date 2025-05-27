@@ -1,5 +1,4 @@
 # Create a new option in menuconfig
-#
 config SIMPLE_BUTTON
     bool "Simple button"
     default n       # Set the driver to be disabled by default
