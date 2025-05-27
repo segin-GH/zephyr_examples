@@ -1,0 +1,34 @@
+/ {
+	aliases {
+		my-button-1 = &button1;
+		my-button-2 = &button2;
+	};
+
+	simple_button: button {
+		button_1: simple_button_1 {
+			compatible = "simple,button";
+			pin = <&d4>;
+		};
+
+		button_2: simple_button_2 {
+			compatible = "custom,button";
+			pin = <&d5>;
+		};
+	};
+
+	gpio_keys {
+		compatible = "gpio-keys";
+		debounce-interval-ms = <50>;
+		polling-mode;
+
+		d4: gpio4 {
+			gpios = <&gpio0 4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		};
+
+		d5: gpio5 {
+			gpios = <&gpio0 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		};
+
+
+	};
+};
